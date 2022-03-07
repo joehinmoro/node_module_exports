@@ -22,35 +22,34 @@ const isPrime = (num) => {
 
 // using isPrime(), generate prime numbers
 // from 2 to a particular number: num
-const generatePrimes = (num) => {
-    num = parseInt(num);
+const generatePositivePrimes = (num) => {
+    num = Math.abs(parseInt(num));
     const primes = [];
-    const absNum = Math.abs(num);
-    const nums = [...Array(absNum + 1).keys()].splice(1);
-    if (num < 0) {
-        // num = parseInt(Math.abs(num));
-        for (let num of nums) {
-            if (isPrime(num)) {
-                primes.unshift(num * -1);
-            }
-        }
-    } else if (num > 0) {
-        for (let num of nums) {
-            if (isPrime(num)) {
-                primes.push(num);
-            }
+    const nums = [...Array(++num).keys()].splice(1);
+    for (let num of nums) {
+        if (isPrime(num)) {
+            primes.push(num);
         }
     }
+    return primes;
+};
 
-    // parse absolute value of num to integer
-
+const generateNegativePrimes = (num) => {
+    num = Math.abs(parseInt(num));
+    const primes = [];
+    const nums = [...Array(++num).keys()].splice(1);
+    for (let num of nums) {
+        if (isPrime(num)) {
+            primes.unshift(num * -1);
+        }
+    }
     return primes;
 };
 
 const primeFactors = (num) => {
     num = parseInt(num);
 
-    const primes = generatePrimes(num);
+    const primes = generatePositivePrimes(num);
     // THESE AREN'T ALL PRIMES...
     // const primes = [2, 3, 5, 7, 11, 13, 17, 19];
 
@@ -77,4 +76,4 @@ const primeFactors = (num) => {
 
 // console.log(isPrime(arg));
 // console.log(primeFactors(arg));
-console.log(generatePrimes(arg));
+console.log(generateNegativePrimes(arg));
