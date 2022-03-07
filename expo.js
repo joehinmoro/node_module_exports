@@ -2,27 +2,55 @@
 // and parse to integer
 const arg = parseInt(process.argv[2]);
 
-// verify if a number is a prime number
+// verify if a number: num is a prime number
 const isPrime = (num) => {
-    // parse absolute value of number to integer
+    // parse absolute value of num to integer
     num = parseInt(Math.abs(num));
-    // verify that the number must be greater than 2:
+    // verify that num must be greater than 2:
     // [2 is the smallest prime number]
     if (num < 2) return false;
-    // loop over from 2 to the number-1 to check if the
-    // number has a factor which is also a perfect divisor
+    // loop over from 2 to num-1 to check if
+    // num has a factor which is also a perfect divisor
     for (let idx = 2; idx < num; idx++) {
         // return false if a perfect divisor exists
         if (num % idx === 0) return false;
     }
     // return true if no perfect divisor exists
+    // hence, num is a prime number
     return true;
+};
+
+// using isPrime(), generate prime numbers
+// from 2 to a particular number: num
+const generatePrimes = (num) => {
+    num = parseInt(num);
+    const primes = [];
+    const absNum = Math.abs(num);
+    const nums = [...Array(absNum + 1).keys()].splice(1);
+    if (num < 0) {
+        // num = parseInt(Math.abs(num));
+        for (let num of nums) {
+            if (isPrime(num)) {
+                primes.unshift(num * -1);
+            }
+        }
+    } else if (num > 0) {
+        for (let num of nums) {
+            if (isPrime(num)) {
+                primes.push(num);
+            }
+        }
+    }
+
+    // parse absolute value of num to integer
+
+    return primes;
 };
 
 const primeFactors = (num) => {
     num = parseInt(num);
 
-    const primes = returnPrimes(num);
+    const primes = generatePrimes(num);
     // THESE AREN'T ALL PRIMES...
     // const primes = [2, 3, 5, 7, 11, 13, 17, 19];
 
@@ -47,18 +75,6 @@ const primeFactors = (num) => {
     return factors;
 };
 
-const returnPrimes = (num) => {
-    num = parseInt(Math.abs(num));
-    const primes = [];
-    const nums = [...Array(++num).keys()].splice(1);
-    for (let num of nums) {
-        if (isPrime(num)) {
-            primes.push(num);
-        }
-    }
-    return primes;
-};
-
 // console.log(isPrime(arg));
-console.log(primeFactors(arg));
-// console.log(returnPrimes(arg));
+// console.log(primeFactors(arg));
+console.log(generatePrimes(arg));
