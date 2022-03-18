@@ -19,3 +19,7 @@ const evenOdd = (num) => (!(num & 1) ? `even` : `odd`);
 // console.log(6 & 2);
 // 5 = 0101
 // 9 = 1001
+
+exports.isEven = isEven;
+exports.isOdd = isOdd;
+exports.evenOdd = evenOdd;

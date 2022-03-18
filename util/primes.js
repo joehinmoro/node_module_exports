@@ -76,4 +76,9 @@ const primeFactors = (num) => {
 
 // console.log(isPrime(arg));
 // console.log(primeFactors(arg));
-console.log(generateNegativePrimes(arg));
+// console.log(generateNegativePrimes(arg));
+
+exports.isPrime = isPrime;
+exports.generatePositivePrimes = generatePositivePrimes;
+exports.generateNegativePrimes = generateNegativePrimes;
+exports.primeFactors = primeFactors;
